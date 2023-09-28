@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student List</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <h1>Student list</h1>
@@ -13,6 +14,7 @@
             <th>ID</th>
             <th>SEMESTER</th>
             <th>CREDIT COMPLETE</th>
+            <th>ACTION</th>
         </tr>
         
     <% if(student.length > 0){ %>
@@ -22,6 +24,7 @@
                     <td><%- student[i].id %></td>
                     <td><%- student[i].sem %></td>
                     <td><%- student[i].credit %></td>
+                    <td><a href="/delete-student?id=<%- student[i].id %>">Delete</a></td>
                 </tr>
                 <% } %>
         <% }else{ %>
