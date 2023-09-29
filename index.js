@@ -64,4 +64,42 @@ app.get('/delete-student',function(req,res)
     })
 
 })
+app.get('/update-student',function(req,res)
+{
+    con.connect(function(error)
+    {
+        if(error) console.log(error);
+        var sql = "select * from student where id=?";
+        var id = req.query.id;
+        con.query(sql,[id],function(error,result)
+        {
+            if(error) console.log(error);
+           //  console.log(result);
+             res.render(__dirname+'/update-student',{student:result});
+            
+        })
+    })
+
+})
+
+app.post('/update-student',function(req,res)
+{
+    var name = req.body.name;
+    var id = req.body.id;
+    var sem = req.body.sem;
+    var credit = req.body.credit;
+    con.connect(function(error)
+    {
+        if(error) console.log(error);
+        var sql = "UPDATE student set name=?, sem=?, credit=? where id=?";
+        con.query(sql,[name, sem, credit, id],function(error,result)
+        {
+            if(error) console.log(error);
+           res.redirect('/student');
+            
+            
+        })
+    })
+
+})
 app.listen(7000);

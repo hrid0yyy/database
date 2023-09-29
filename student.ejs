@@ -24,7 +24,9 @@
                     <td><%- student[i].id %></td>
                     <td><%- student[i].sem %></td>
                     <td><%- student[i].credit %></td>
-                    <td><a href="/delete-student?id=<%- student[i].id %>">Delete</a></td>
+                    <td><a href="/delete-student?id=<%- student[i].id %>">Delete</a>
+                        <a href="/update-student?id=<%- student[i].id %>">Update</a>
+                    </td>
                 </tr>
                 <% } %>
         <% }else{ %>
