@@ -14,6 +14,8 @@ app.get('/',function(req,res){
     res.sendFile(__dirname+'/register.html');
 })
 
+
+
 app.post('/',function(req,res){
     var name = req.body.name;
     var id = req.body.id;
@@ -101,5 +103,38 @@ app.post('/update-student',function(req,res)
         })
     })
 
+})
+
+app.get('/search-student',function(req,res)
+{
+    con.connect(function(error)
+    {
+        if(error) console.log(error);
+        var sql = "select * from student";
+        con.query(sql,function(error,result)
+        {
+            if(error) console.log(error);
+           //  console.log(result);
+             res.render(__dirname+'/search-student',{student:result});
+        })
+    })
+})
+
+app.get('/search',function(req,res)
+{
+    var name = req.query.name
+    var id = req.query.id
+
+    con.connect(function (error)
+        {
+            if(error) console.log("error");
+
+            var sql = "select * from student where name LIKE '%"+name+"%' AND id LIKE '%"+id+"%'"
+            con.query(sql,function(error,result)
+            {
+                if(error) console.log("error")
+                res.render(__dirname+"/search-student",{student:result})
+            })
+        })
 })
 app.listen(7000);
